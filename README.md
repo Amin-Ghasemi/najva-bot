@@ -2,8 +2,8 @@
 the Robot sending secret messages in Telegram
 
 #### Photos
-![image](https://user-images.githubusercontent.com/62441713/120935630-fa744b00-c718-11eb-8e9d-663e34e04918.png)
 ![image](https://user-images.githubusercontent.com/62441713/120935612-e4668a80-c718-11eb-82da-752e2143f0cd.png)
+![image](https://user-images.githubusercontent.com/62441713/120935630-fa744b00-c718-11eb-8e9d-663e34e04918.png)
 
 ## Installation pyrogram
 #### Windows
