@@ -3,6 +3,7 @@
 the Robot sending secret messages in Telegram
 
 ## Installation pyrogram
+#### Windows
 ```bash
 pip install Pyrogram
 ```
