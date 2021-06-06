@@ -117,7 +117,7 @@ def answer(client, query):
             ],
             cache_time=1
         )
-    except ValueError as e:
-        print(e)
+    except:
+        pass
 
 app.run()
