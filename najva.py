@@ -1,5 +1,5 @@
 import sqlite3
-import hashlib
+from hashlib import md5
 from datetime import datetime
 from pyrogram import Client
 from pyrogram.types import (InlineKeyboardButton, InlineKeyboardMarkup,
@@ -78,7 +78,7 @@ def answer(client, query):
         message = str(query.query).replace(receiver, "").replace("@", "")
 
         # _ Create hash for message id _
-        message_id = str(hashlib.md5(str(receiver+message+datetime.now().strftime("%H%m%S%D")).encode('utf-8')).hexdigest())
+        message_id = str(md5(str(receiver+message+datetime.now().strftime("%H%m%S%D")).encode('utf-8')).hexdigest())
         # ______________________________
 
         conn = sqlite3.connect('najva.db')
