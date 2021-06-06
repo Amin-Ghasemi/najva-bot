@@ -10,7 +10,7 @@ pip install pyrogram
 ```bash
 import sqlite3
 
-conn = sqlite3.connect('najva1.db')
+conn = sqlite3.connect('najva.db')
 
 cur = conn.cursor()
 
