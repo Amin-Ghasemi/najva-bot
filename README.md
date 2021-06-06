@@ -6,3 +6,7 @@ the Robot sending secret messages in Telegram
 ```bash
 pip install pyrogram
 ```
+## Installation database
+```bash
+pip install pyrogram
+```
