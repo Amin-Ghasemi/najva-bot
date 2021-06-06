@@ -6,9 +6,9 @@ from pyrogram.types import (InlineKeyboardButton, InlineKeyboardMarkup,
                             InlineQueryResultArticle,InputTextMessageContent)
 
 # _ client _
-app = Client("najva-debug",
-            api_id="3786215",
-            api_hash="8c24f7b23986ba5caff051f81f1903d0",
+app = Client("najva",
+            api_id="",
+            api_hash="",
             bot_token="",
             )
 # __________
