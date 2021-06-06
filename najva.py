@@ -6,9 +6,9 @@ from pyrogram.types import (InlineKeyboardButton, InlineKeyboardMarkup,
                             InlineQueryResultArticle,InputTextMessageContent)
 
 # _ client _
-app = Client("najva",
-            api_id="",
-            api_hash="",
+app = Client("najva-debug",
+            api_id="3786215",
+            api_hash="8c24f7b23986ba5caff051f81f1903d0",
             bot_token="",
             )
 # __________
@@ -18,22 +18,30 @@ async def get(_:app, query):
     if query.data == "#":
         await app.answer_callback_query(query.id, "پیغام ها پس از خوانده شدن به صورت خودکار نابود میشوند 👁‍🗨")
     else:
+        conn = sqlite3.connect('najva.db')
+        cur = conn.cursor()
+        cur.execute(f'''SELECT * FROM messages WHERE message_id = "{query.data}"''')
+
+        All = cur.fetchall()
+        message = All[0][0]
+        sender = All[0][1]
+        receiver = All[0][2]
+        username = query.from_user.username.lower()
+
+        # _ Validation username or user id _
         try:
-            conn = sqlite3.connect('najva.db')
-            cur = conn.cursor()
-            cur.execute(f'''SELECT * FROM messages WHERE message_id = "{query.data}"''')
+            getChatId = await app.get_chat(f"{receiver}")
+            getChatId = str(getChatId.id).replace(" ", "")
+            getChatId = int(getChatId)
+        except:
+            getChatId = None
+        # __________________________________
 
-            All = cur.fetchall()
-            message = All[0][0]
-            sender = All[0][1]
-            receiver = All[0][2]
+        if getChatId == None:
+            await app.answer_callback_query(query.id, "ایدی یا یوزرنیم وارد شده نامعتبر است!")
 
-            username = query.from_user.username.lower()
-
-            if query.from_user.id == int(sender):
-                await app.answer_callback_query(query.id, message, show_alert=True)
-
-            elif username == receiver.lower() or int(query.from_user.id) == int(receiver):
+        else:
+            if getChatId == query.from_user.id:
                 await app.answer_callback_query(query.id, message, show_alert=True)
                 await app.edit_inline_reply_markup(query.inline_message_id, reply_markup=InlineKeyboardMarkup(
                     [
@@ -43,21 +51,16 @@ async def get(_:app, query):
                     ]
                     )
                 )
+                
                 cur.execute(f'''DELETE FROM messages WHERE message_id = "{query.data}"''')
+                conn.commit()
+                conn.close()
+
+            elif query.from_user.id == sender:
+                await app.answer_callback_query(query.id, message, show_alert=True)
 
             else:
-                await app.answer_callback_query(query.id, "شرمنده، نمیتونی پیغام بقیه رو بخونی :)")
-            
-            if username[0] == '@':
-                username[0] = str(username[0]).replace("@", "")
-
-            
-            conn.commit()
-            conn.close()
-
-        except ValueError as e:
-            print(e)
-
+                await app.answer_callback_query(query.id, "شرمنده نمیتونم این پیغام رو بهت نشون بدم :)")
 
 SCROLL_THUMB = "https://i.imgur.com/L1u0VlX.png"
 
