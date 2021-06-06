@@ -8,5 +8,5 @@ pip install pyrogram
 ```
 ## Installation database
 ```bash
-pip install pyrogram
+
 ```
