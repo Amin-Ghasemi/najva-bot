@@ -5,29 +5,16 @@ the Robot sending secret messages in Telegram
 ![image](https://user-images.githubusercontent.com/62441713/120935749-7b334700-c719-11eb-8845-17300b1c3864.png)
 ![image](https://user-images.githubusercontent.com/62441713/120935630-fa744b00-c718-11eb-8e9d-663e34e04918.png)
 
-## Installation pyrogram
-#### Windows
+## Installation
+
+### Install Pyrogram: 
 ```bash
 pip install Pyrogram
 ```
-#### Linux
+
+### Then run this: 
 ```bash
-pip3 install Pyrogram
+python install.py
 ```
-## Create database
-```bash
-import sqlite3
 
-conn = sqlite3.connect('najva.db')
-
-cur = conn.cursor()
-
-cur.execute("""CREATE TABLE "messages" (
-	"message"	TEXT,
-	"sender"	INTEGER,
-	"receiver"	TEXT,
-	"message_id"	TEXT NOT NULL,
-	PRIMARY KEY("message_id")
-    );
-""")
-```
+Note: Use `pip3 / python3` if you are on Linux or Mac.
