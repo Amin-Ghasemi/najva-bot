@@ -38,20 +38,21 @@ async def get(_:app, query):
         # __________________________________
 
         if getChatId == None:
-            await app.answer_callback_query(query.id, "ایدی یا یوزرنیم وارد شده نامعتبر است!")
+            await app.answer_callback_query(query.id, "ایدی یا یوزر نیم وارد شده نامعتبر است!")
 
         else:
             if getChatId == query.from_user.id:
+                Time = datetime.now().strftime("%H:%M:%S")
                 await app.answer_callback_query(query.id, message, show_alert=True)
                 await app.edit_inline_reply_markup(query.inline_message_id, reply_markup=InlineKeyboardMarkup(
                     [
                         [
-                            InlineKeyboardButton(text="خوانده شد ✅", callback_data="#")
+                            InlineKeyboardButton(text=f"خوانده شده در {Time} ✓", callback_data="#")
                         ],
                     ]
                     )
                 )
-                
+
                 cur.execute(f'''DELETE FROM messages WHERE message_id = "{query.data}"''')
                 conn.commit()
                 conn.close()
@@ -117,7 +118,7 @@ def answer(client, query):
             ],
             cache_time=1
         )
-    except:
-        pass
+    except ValueError as e:
+        print(e)
 
 app.run()
