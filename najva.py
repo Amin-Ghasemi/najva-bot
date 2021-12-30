@@ -70,7 +70,6 @@ def answer(client, query):
     # _ Delete '@' from username _
     receiver = str(query.query).split(" ")[0]
     receiver = receiver.replace("@", "")
-    receiver = receiver
     # ____________________________
 
     sender = query.from_user.id
